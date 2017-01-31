@@ -3,97 +3,67 @@
 <meta charset="utf-8" />
 <title>CSS3 Contact Form</title>
 </head>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" />
 <body>
 <div id="contact">
-    <form method="get" action="home">
     <h1 align="center"> Leave Manager</h1>
+    <form method="post" action="myaction">
 <!-- Mid dropdown start-->
-     <div class="form-group">
-        <label id="mindID">Mindtree ID</label>
-        <select id="mid" class="form-control">
-          <option selected disabled>Select MID </option>
-        </select>
-    </div>
-<!-- Mid dropdown end-->
-    <div>
-    	<h1><label id="name"></label></h1>
-    </div>
-<!-- Leave dropdown start-->
-    <div>
-        <label id="lt">Type of Leave</label>
-        <select id="leave" class="form-control">
-          <option selected disabled>Select Leave </option>
-         <!--  <option selected="true" style="display:none;">Select language</option> -->
-        </select>
-        <br>
-            <label><input type="checkbox" id="cbox1" value="cover"> Cover Given</label>
-        </br>
-    </div>
-<!-- Leave dropdown end-->
+      <label id="mindID">Mindtree ID</label>
+      <select id="mid" class="form-control" name="mid">
+        <option selected>Select MID </option>
+      </select>
+  <!-- Mid dropdown end-->
+      <div>
+        <br>Name:<br>
+      	<input id="empName" name="empName" type="text">
+      </div>
+  <!-- Leave dropdown start-->
+      <div>
+          <br><label id="lt">Type of Leave</label>
+          <select id="leaveType" name="leaveType" class="form-control">
+            <option value="Annual Leave">Annual Leave</option>
+            <option value="Sick Leave">Sick Leave</option>
+          </select>
+      </div>
+      <div>
+          <br><input type="checkbox" id="cbox1" value="cover" name="cover"> Cover Given
+      </div>
+  <!-- Leave dropdown end-->
 
-<!-- Date start-->
-    <div class="bs-example">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <label for="from_date">From : </label>
-                <div class='input-group date' id='dt1'>
-                    <input type='text' class="form-control" id='dt2' readonly="readonly"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
+  <!-- Date start-->
+       <br><label for="from_date">From : </label>
+       <div class='input-group date' id='dt1'>
+               <input type='text' class="form-control" id='dt2' readonly="readonly"/>
+               <span class="input-group-addon">
+                   <span class="glyphicon glyphicon-calendar"></span>
+               </span>
+           </div>
 
-                <label for="to_date">To : </label>
-                <div class='input-group date' id='dt3'>
-                    <input type='text' class="form-control" id='dt4' readonly="readonly"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-                <div>
-                    <label for="duration">No. of days </label>
-                    <input type='text' class="form-control" id='dt5' readonly="readonly"/>
-                </div>
-                <br>
-                    <button type="button" id='button_id'>Calculate</button>
-                </br>
-            </div>
-        </div>
-    </div>
- <!-- Date end-->  
-    <div>
-        <input type="submit" id="submit_leave" value="Send message" />
-    </div>      
-     
+       <label for="to_date">To : </label>
+       <div class='input-group date' id='dt3'>
+               <input type='text' class="form-control" id='dt4' readonly="readonly"/>
+               <span class="input-group-addon">
+                   <span class="glyphicon glyphicon-calendar"></span>
+               </span>
+           </div>
+
+         </br>
+           <input type='text' class="form-control" id='dt5' readonly="readonly" name="days"/>
+         </br>
+       <button type="button" id='button_id'>Calculate</button>
+   <!-- Date end-->
+      <div>
+          <br><input type="submit" id="submit_leave" value="Send message" />
+      </div>
+
     </form>
 </div>
-
-<!-- <div>
-    <form action="http://127.0.0.1:8080/myaction" method="post">
-        <fieldset>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your full name" />
-
-            <label for="email">Leaves</label>
-            <input type="text" id="leave" name="leaves" placeholder="Enter your Leaves" />
-
-    
-        <select>
-            <option value="annualLeave">Annual Leave</option>
-            <option value="sickLeave">Sick Leave</option>
-        </select>
-
-        <label><input type="checkbox" id="cbox1" value="cover"> Cover Given</label><br>
-
-        <input type="submit" value="Send message" />
-
-        </fieldset>
-    </form>
-</div> -->
 
 </body>
 <script type="text/javascript" src="js/anim.js"></script>

@@ -5,7 +5,6 @@ $(document).ready(function() {
           url: 'adminDetails',
           success: function(details) {
             $('#mid').append(getOptions(details["mid"]));
-            $('#leave').append(getOptions(details["leave"]));
          }
 
      });

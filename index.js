@@ -30,13 +30,13 @@ app.get('/mindDetails',function(req,res){
       console.log(err);
       res.send(mindInfo);
     }else{
-      mindInfo.push({ 
+      mindInfo.push({
         mid: row.mid,
         name: row.name,
         team: row.team
       } );
       res.send(mindInfo);
-    }   
+    }
   });
 });
 
@@ -44,17 +44,21 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 })
 
+app.get('/bankHolidays', function (req, res) {
+  api.getBankHolidays(function(err, dates){
+    if(err){
+      console.log(err);
+      res.send("error");
+    }else{
+      res.send(dates);
+    }
+  });
+})
+
 app.post('/myaction', urlencodedParser, function (req, res) {
-
-   response = {
-      mid:req.body.mid,
-      duration: req.body.duration,
-      leaves:req.body.leave_type
-   };
-   console.log(response);
-   res.send("/")
-
-
+console.log(req.body)
+  api.updateCell(req.body)
+  res.redirect("/")
 })
 
 app.listen(8080, function() {
