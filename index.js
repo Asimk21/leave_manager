@@ -1,0 +1,62 @@
+var express = require('express');
+var app = express();
+var path = require('path');
+var bodyParser = require('body-parser');
+var api = require('./googleSheetApi')
+
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.set('views', __dirname + '/views');
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/adminDetails', function(req, res){
+  details = {}
+  details["mid"] = []
+  details["leave"] = []
+  api.getAdminSheetRows(function(rows){
+      rows.forEach(function(row) {
+        details["mid"].push(row.mid);
+        details["leave"].push(row.leave);
+      });
+     res.send(details);
+  });
+});
+
+app.get('/mindDetails',function(req,res){
+  var mindInfo = [];
+  api.getAdminSheetRowsByMid(req.query.mid, function(err, row){
+    if(err){
+      console.log(err);
+      res.send(mindInfo);
+    }else{
+      mindInfo.push({ 
+        mid: row.mid,
+        name: row.name,
+        team: row.team
+      } );
+      res.send(mindInfo);
+    }   
+  });
+});
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'));
+})
+
+app.post('/myaction', urlencodedParser, function (req, res) {
+
+   response = {
+      mid:req.body.mid,
+      duration: req.body.duration,
+      leaves:req.body.leave_type
+   };
+   console.log(response);
+   res.send("/")
+
+
+})
+
+app.listen(8080, function() {
+  console.log('Server running at http://127.0.0.1:8080/');
+});
