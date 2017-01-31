@@ -1,5 +1,5 @@
 $('#dt1,#dt3').datetimepicker({
-format: 'YYYY/MM/DD',ignoreReadonly : true
+  format: 'YYYY/MM/DD',ignoreReadonly : true
 });
 
 function getBusinessDatesCount(startDate, endDate, dates) {
@@ -22,7 +22,6 @@ $("#button_id").click(function(){
 // do something when button is clicked
 var from_date = document.getElementById("dt2").value.toString();
 var to_date = document.getElementById("dt4").value.toString();
-console.log(from_date)
 var d1 = new Date(from_date);
 var d2 = new Date(to_date);
 $.ajax({

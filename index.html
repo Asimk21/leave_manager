@@ -1,69 +1,102 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>CSS3 Contact Form</title>
+<title>Leave Manager</title>
 </head>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" />
 <body>
-<div id="contact">
-    <h1 align="center"> Leave Manager</h1>
-    <form method="post" action="myaction">
-<!-- Mid dropdown start-->
-      <label id="mindID">Mindtree ID</label>
-      <select id="mid" class="form-control" name="mid">
-        <option selected>Select MID </option>
-      </select>
-  <!-- Mid dropdown end-->
-      <div>
-        <br>Name:<br>
-      	<input id="empName" name="empName" type="text">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Leave Manager</a>
       </div>
-  <!-- Leave dropdown start-->
-      <div>
-          <br><label id="lt">Type of Leave</label>
-          <select id="leaveType" name="leaveType" class="form-control">
-            <option value="Annual Leave">Annual Leave</option>
-            <option value="Sick Leave">Sick Leave</option>
-          </select>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <form class="form-horizontal" method="post" action="myaction">
+      <fieldset>
+        <div class="form-group">
+          <label for="select" class="col-lg-2 control-label"> Select MID</label>
+          <div class="col-lg-10">
+            <select class="form-control" id="mid" name="mid">
+              <option>Select MID</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Name</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" id="empName" name="empName" readonly="readonly">
+          </div>
+        </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Leave Type</label>
+            <div class="col-lg-10">
+              <select class="form-control" id="leaveType" name="leaveType">
+                <option>Annual Leave</option>
+                <option>Sick Leave</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+        <label class="col-lg-2 control-label">Cover</label>
+        <div class="col-lg-10">
+          <div class="radio">
+            <label>
+              <input type="radio" name="cover" id="optionsRadios1" value="Yes">
+              Yes
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="cover" id="optionsRadios2" value="No" checked="">
+              No
+            </label>
+          </div>
+        </div>
       </div>
-      <div>
-          <br><input type="checkbox" id="cbox1" value="cover" name="cover"> Cover Given
-      </div>
-  <!-- Leave dropdown end-->
-
-  <!-- Date start-->
-       <br><label for="from_date">From : </label>
-       <div class='input-group date' id='dt1'>
-               <input type='text' class="form-control" id='dt2' readonly="readonly"/>
-               <span class="input-group-addon">
-                   <span class="glyphicon glyphicon-calendar"></span>
-               </span>
-           </div>
-
-       <label for="to_date">To : </label>
-       <div class='input-group date' id='dt3'>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">From : </label>
+            <div class="col-lg-10">
+              <div class='input-group date' id='dt1'>
+              <input type='text' class="form-control" id='dt2' readonly="readonly"/>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+            </div>
+            <label class="col-lg-2 control-label">To : </label>
+            <div class="col-lg-10">
+              <div class='input-group date' id='dt3'>
                <input type='text' class="form-control" id='dt4' readonly="readonly"/>
                <span class="input-group-addon">
-                   <span class="glyphicon glyphicon-calendar"></span>
+                 <span class="glyphicon glyphicon-calendar"></span>
                </span>
-           </div>
-
-         </br>
-           <input type='text' class="form-control" id='dt5' readonly="readonly" name="days"/>
-         </br>
-       <button type="button" id='button_id'>Calculate</button>
-   <!-- Date end-->
-      <div>
-          <br><input type="submit" id="submit_leave" value="Send message" />
-      </div>
-
+            </div>
+          </div>
+        </div>
+         <div class="form-group">
+          <label class="col-lg-2 control-label">Number of days</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" id='dt5' readonly="readonly" name="days">
+          </div>
+        </div>
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <button type="button" id='button_id' class="btn btn-info" >Calculate</button>
+              <button type="submit" id="submit_leave" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+      </fieldset>
     </form>
-</div>
+  </div>
 
 </body>
 <script type="text/javascript" src="js/anim.js"></script>

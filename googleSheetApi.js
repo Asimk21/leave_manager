@@ -6,7 +6,7 @@ var creds_json = {
       private_key: creds.private_key
     }
 // spreadsheet key is the long id in the sheets URL
-var document = new GoogleSpreadsheet('')
+var document = new GoogleSpreadsheet('1cdgY_bTVFjkxxa7Wq-3HWTa9NmLE9Qebc1Oq4jISkr4')
 var sheet
 
 function updateCell(data){
@@ -33,7 +33,7 @@ function updateCell(data){
               }else{
                 row.sick = row.sick ? parseInt(row.sick) + parseInt(days) : parseInt(days)
               }
-              if (cover == 'cover'){
+              if (cover == 'Yes'){
                 row.cover = row.cover ? parseInt(row.cover) + parseInt(days) : parseInt(days)
               }
               row.save(()=>{
