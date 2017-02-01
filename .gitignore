@@ -25,6 +25,8 @@ test/load-tests
 test/gatling.log
 test/load-tests/project/project/target/
 
+cred.json
+
 # Speculate
 *.service
 /SOURCES
