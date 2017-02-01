@@ -6,7 +6,7 @@ var creds_json = {
       private_key: creds.private_key
     }
 // spreadsheet key is the long id in the sheets URL
-var document = new GoogleSpreadsheet('1cdgY_bTVFjkxxa7Wq-3HWTa9NmLE9Qebc1Oq4jISkr4')
+var document = new GoogleSpreadsheet('')
 var sheet
 
 function updateCell(data){
