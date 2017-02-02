@@ -26,9 +26,10 @@ var d1 = new Date(from_date);
 var d2 = new Date(to_date);
 $.ajax({
        type: 'GET',
-       url: 'bankHolidays',
+       data:{sheetName:"Master", key: ["holidays"] },
+       url: 'getColumn',
        success: function(dates) {
-         var count = getBusinessDatesCount(d1, d2, dates);
+         var count = getBusinessDatesCount(d1, d2, dates[0]);
          document.getElementById("dt5").value = count;
       }
   });
@@ -42,9 +43,10 @@ $("#mid").change(function () {
 
     $.ajax({
           type: 'GET',
-          data: {"mid": employeeID },
-          url: 'mindDetails',
+          data: {sheetName:"Master", key: [employeeID] },
+          url: 'getColumn',
           success: function(mDetails) {
+            console.log(mDetails)
           	empName = mDetails[0].name
           	document.getElementById("empName").value=empName;
          }

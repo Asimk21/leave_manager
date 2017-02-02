@@ -45,7 +45,18 @@ app.get('/', function (req, res) {
 })
 
 app.get('/bankHolidays', function (req, res) {
-  api.getBankHolidays(function(err, dates){
+  api.getSubsetObject(function(err, dates){
+    if(err){
+      console.log(err);
+      res.send("error");
+    }else{
+      res.send(dates);
+    }
+  });
+})
+
+app.get('/getColumn', function (req, res) {
+  api.getSubsetObject(req.query, function(err, dates){
     if(err){
       console.log(err);
       res.send("error");

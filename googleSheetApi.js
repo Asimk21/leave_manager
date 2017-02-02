@@ -6,7 +6,7 @@ var creds_json = {
       private_key: creds.private_key
     }
 // spreadsheet key is the long id in the sheets URL
-var document = new GoogleSpreadsheet('')
+var document = new GoogleSpreadsheet('1cdgY_bTVFjkxxa7Wq-3HWTa9NmLE9Qebc1Oq4jISkr4')
 var sheet
 
 function updateCell(data){
@@ -83,20 +83,43 @@ function getAdminSheetRowsByMid(mid, callback){
     })
 }
 
-function getBankHolidays(callback){
- document.useServiceAccountAuth(creds,function(doc){
-        document.getInfo(function(err, info){
-            sheet = getSheet(info, 'Bank holidays'); //info.worksheets[0];
-            sheet.getRows(function(err, rows) {
-              if (err){
-                  callback("error", null);
-              }else {
-                var holidays = _.map(rows, 'holidays')
-              }
-              callback(null, holidays)
-            })
-        })
-    })
+// function getBankHolidays(callback){
+//  document.useServiceAccountAuth(creds,function(doc){
+//         document.getInfo(function(err, info){
+//             sheet = getSheet(info, 'Bank holidays'); //info.worksheets[0];
+//             sheet.getRows(function(err, rows) {
+//               if (err){
+//                   callback("error", null);
+//               }else {
+//                 var holidays = _.map(rows, 'holidays')
+//               }
+//               callback(null, holidays)
+//             })
+//         })
+//     })
+// }
+
+function getSubsetObject(object, callback){
+  console.log("Object", object)
+  document.useServiceAccountAuth(creds,function(doc){
+         document.getInfo(function(err, info){
+             sheet = getSheet(info, object.sheetName);
+             var result = [] //info.worksheets[0];
+             sheet.getRows(function(err, rows) {
+               if (err){
+                   callback("error", null);
+               }else {
+                 object.key.forEach((k)=>{
+                   console.log("Key", k)
+                    result.push(_.map(rows, k))
+                 })
+                //  var result = _.map(rows, object.key)
+               }
+               console.log(result)
+               callback(null, result)
+             })
+         })
+     })
 }
 
 
@@ -111,5 +134,5 @@ module.exports = {
     updateCell: updateCell,
     getAdminSheetRows: getAdminSheetRows,
     getAdminSheetRowsByMid: getAdminSheetRowsByMid,
-    getBankHolidays: getBankHolidays
+    getSubsetObject: getSubsetObject
 }
