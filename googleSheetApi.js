@@ -87,23 +87,6 @@ function getAdminSheetRowsByMid(mid, callback){
     })
 }
 
-<<<<<<< Updated upstream
-// function getBankHolidays(callback){
-//  document.useServiceAccountAuth(creds,function(doc){
-//         document.getInfo(function(err, info){
-//             sheet = getSheet(info, 'Bank holidays'); //info.worksheets[0];
-//             sheet.getRows(function(err, rows) {
-//               if (err){
-//                   callback("error", null);
-//               }else {
-//                 var holidays = _.map(rows, 'holidays')
-//               }
-//               callback(null, holidays)
-//             })
-//         })
-//     })
-// }
-
 function getSubsetObject(object, callback){
   console.log("Object", object)
   document.useServiceAccountAuth(creds,function(doc){
@@ -125,7 +108,7 @@ function getSubsetObject(object, callback){
              })
          })
      })
-=======
+
 function getBankHolidays(callback){
  document.useServiceAccountAuth(creds,function(doc){
         document.getInfo(function(err, info){
@@ -140,7 +123,6 @@ function getBankHolidays(callback){
             })
         })
     })
->>>>>>> Stashed changes
 }
 
 
