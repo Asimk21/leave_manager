@@ -49,16 +49,10 @@ var d1 = new Date(from_date);
 var d2 = new Date(to_date);
 $.ajax({
        type: 'GET',
-       data:{sheetName:"Master", key: ["holidays"] },
-       url: 'getColumn',
+       url: 'bankHolidays',
        success: function(dates) {
-<<<<<<< Updated upstream
-         var count = getBusinessDatesCount(d1, d2, dates[0]);
-         document.getElementById("dt5").value = count;
-=======
          var holidayStr = getBusinessDatesCount(d1, d2, dates);
          document.getElementById("dt5").value = holidayStr;
->>>>>>> Stashed changes
       }
   });
 });
@@ -72,10 +66,9 @@ $("#mid").change(function () {
 
     $.ajax({
           type: 'GET',
-          data: {sheetName:"Master", key: [employeeID] },
-          url: 'getColumn',
+          data: {"mid": employeeID },
+          url: 'mindDetails',
           success: function(mDetails) {
-            console.log(mDetails)
           	empName = mDetails[0].name
           	document.getElementById("empName").value=empName;
          }
