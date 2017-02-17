@@ -3,19 +3,42 @@ $('#dt1,#dt3').datetimepicker({
 });
 
 function getBusinessDatesCount(startDate, endDate, dates) {
-  var count = 0;
-  var curDate = startDate;
-  while (curDate <= endDate) {
-
-    var dayOfWeek = curDate.getDay();
-    var newDate = curDate.getFullYear()+"/"+curDate.getMonth()+1+"/"+curDate.getDate();
-    if(!((dayOfWeek == 6) || (dayOfWeek == 0) || dates.includes(newDate)))
-    {
-       count++;
+   var count = 0;
+   var curDate = startDate;
+   var datesArray=[];
+   var monthData={};
+   var firstMonth=startDate.toLocaleString("en-us", { month: "long" });
+   while (curDate <= endDate) {
+       var dayOfWeek = curDate.getDay();
+       var newDate = curDate.toISOString().slice(0,10).replace(/-/g,"/");
+       if(!((dayOfWeek == 6) || (dayOfWeek == 0) || dates.includes(newDate)))
+       {
+           if(firstMonth.valueOf() == curDate.toLocaleString("en-us", { month: "long" }).valueOf())
+           {
+              count++;
+              curDate.setDate(curDate.getDate() + 1);
+           }
+           else
+           {
+               monthData[firstMonth]=count
+               count=0
+               firstMonth=curDate.toLocaleString("en-us", { month: "long" })
+           }
+      }
+      else
+      {
+        curDate.setDate(curDate.getDate() + 1);
+      }
    }
-    curDate.setDate(curDate.getDate() + 1);
-}
-return count;
+
+   monthData[firstMonth]=count
+   var str = ''
+
+   for (var i in monthData){
+    str += i +":"+ monthData[i]+" "
+  }
+
+  return str
 }
 
 $("#button_id").click(function(){
@@ -28,11 +51,12 @@ $.ajax({
        type: 'GET',
        url: 'bankHolidays',
        success: function(dates) {
-         var count = getBusinessDatesCount(d1, d2, dates);
-         document.getElementById("dt5").value = count;
+         var holidayStr = getBusinessDatesCount(d1, d2, dates);
+         document.getElementById("dt5").value = holidayStr;
       }
   });
 });
+
 
 
 
