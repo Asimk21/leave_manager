@@ -1,3 +1,9 @@
+var d = new Date()
+var dd = d.getDate();
+var mm = d.getMonth()+1;
+var yyyy = d.getFullYear();
+var months = ["January", "February"]
+
 $('#dt1,#dt3').datetimepicker({
   format: 'YYYY/MM/DD',ignoreReadonly : true
 });
@@ -43,10 +49,7 @@ function getBusinessDatesCount(startDate, endDate, dates) {
 
 $("#button_id").click(function(){
 // do something when button is clicked
-var from_date = document.getElementById("dt2").value.toString();
-var to_date = document.getElementById("dt4").value.toString();
-var d1 = new Date(from_date);
-var d2 = new Date(to_date);
+
 $.ajax({
        type: 'GET',
        url: 'bankHolidays',
@@ -57,6 +60,39 @@ $.ajax({
   });
 });
 
+$("#sick").click(function(){
+  var leaveData = { empName: document.getElementById("??").value,
+               mid : document.getElementById("??").value,
+               leaveType: document.getElementById("??").value,
+               cover: "sick",
+               days = `${months[mm]}: 1`
+             }
+      $.ajax({
+       type: 'GET',
+       url: 'myaction',
+       data: leaveData,
+       success: function() {
+//console.log
+      }
+  });
+});
+
+$("#annual").click(function(){
+  var leaveData = { empName: document.getElementById("??").value,
+               mid : document.getElementById("??").value,
+               leaveType: document.getElementById("??").value,
+               cover: document.getElementById("??").value,
+               days = `${months[mm]}: 1`
+             }
+      $.ajax({
+       type: 'GET',
+       url: 'myaction',
+       data: leaveData,
+       success: function() {
+//console.log
+      }
+  });
+});
 
 
 
@@ -69,8 +105,7 @@ $("#mid").change(function () {
           data: {"mid": employeeID },
           url: 'mindDetails',
           success: function(mDetails) {
-          	empName = mDetails[0].name
-          	document.getElementById("empName").value=empName;
+          	console.log("done")
          }
 
      });
