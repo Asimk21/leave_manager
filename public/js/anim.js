@@ -1,5 +1,9 @@
-$('#dt1,#dt3').datetimepicker({
-  format: 'YYYY/MM/DD',ignoreReadonly : true
+// $('#dt1,#dt3').datetimepicker({
+//   format: 'YYYY/MM/DD',ignoreReadonly : true
+// });
+
+$('#fromDate,#toDate').datetimepicker({
+   locale: 'en-GB',format: 'DD/MM/YYYY',ignoreReadonly : true
 });
 
 function getBusinessDatesCount(startDate, endDate, dates) {
@@ -41,10 +45,11 @@ function getBusinessDatesCount(startDate, endDate, dates) {
   return str
 }
 
-$("#button_id").click(function(){
+$("#calculate").click(function(e){
+e.preventDefault();
 // do something when button is clicked
-var from_date = document.getElementById("dt2").value.toString();
-var to_date = document.getElementById("dt4").value.toString();
+var from_date = document.getElementById("fDate").value.toString();
+var to_date = document.getElementById("tDate").value.toString();
 var d1 = new Date(from_date);
 var d2 = new Date(to_date);
 $.ajax({
@@ -52,7 +57,7 @@ $.ajax({
        url: 'bankHolidays',
        success: function(dates) {
          var holidayStr = getBusinessDatesCount(d1, d2, dates);
-         document.getElementById("dt5").value = holidayStr;
+         document.getElementById("duration").value = holidayStr;
       }
   });
 });
