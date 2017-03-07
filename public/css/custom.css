@@ -1,0 +1,39 @@
+.p {
+    font-size: 200%;
+}
+
+.textbox{
+  height: 60px;
+  width: 100%;
+}
+
+.btn {
+  border-width: 20px;
+  height: 100px;
+  width: 40%;
+}
+
+.h1 {
+    font-size: 30px;
+}
+
+.margin{
+   margin-top: 30px;
+   margin-bottom: 10px;
+   margin-right: 10px;
+   margin-left: 10px;
+}
+
+.btnGrid {
+  text-align: center;
+}
+
+
+.noDataForm {
+  display: none;
+}
+
+.spacing{
+  margin-right: 5px;
+  margin-left: 5px; 
+}
