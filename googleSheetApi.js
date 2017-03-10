@@ -20,6 +20,7 @@ function updateCell(data){
       console.log('Loaded doc: '+info.title+' by '+info.author.email);
       days.forEach((monthData) => {
           var dataArr = monthData.split(":")
+          console.log(dataArr)
           sheet = getSheet(info, dataArr[0])
           sheet.getRows({
             limit: 50
@@ -46,22 +47,8 @@ function updateCell(data){
   })
 }
 
-function durationType(days){
-  var total = 0
-  days = days.split(' ')
-  days.pop()
-  days.forEach(function(d){
-    total += parseInt(d.split(":")[1])
-  })
-  if (total <= 3) {
-      return("ShortRange")
-  }else {
-      return("LongRange")
-  }
-}
-
 function addRange(data){
-  type = durationType(data.days)
+//  type = durationType(data.dates)
   document.useServiceAccountAuth(creds,function(doc){
     document.getInfo(function(err, info) {
       sheet = getSheet(info, "Test")
@@ -71,7 +58,7 @@ function addRange(data){
           for (var i = 0; i < rows.length; i++) {
               row = rows[i]
               if (row.name == data.name){
-                if (type == 'ShortRange'){
+                if (data.rangeType == 'ShortRange'){
                   row.shortrange = row.shortrange == '' ? data.dates : row.shortrange + ',' + data.dates
                 }else{
                   row.longrange = row.longrange == '' ? data.dates : row.longrange + ',' + data.dates
@@ -152,6 +139,5 @@ module.exports = {
     getAdminSheetRows: getAdminSheetRows,
     getAdminSheetRowsByMid: getAdminSheetRowsByMid,
     getBankHolidays: getBankHolidays,
-    addRange: addRange,
-    durationType: durationType
+    addRange: addRange
 }

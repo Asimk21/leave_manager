@@ -14,10 +14,11 @@ api = require ('./googleSheetApi')
 data = { name: "Rupam",
          mid : "M1012919",
          type: "Annual Leave",
-         days : `January:1 February:1 `,
+         days : `January:1 `,
          from: "01/28/2017",
-         to: "29/01/2017",
-         dates: ["01/28/2017", "01/28/2017", "01/28/2017", "01/28/2017", "01/28/2017"]
+         to: "01/28/2017",
+         dates: ["01/28/2017"]
        }
 
 api.addRange(data)
+api.updateCell(data)
