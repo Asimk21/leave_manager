@@ -126,7 +126,14 @@ $("#toDate").change(function () {
 //   });
 
 $("#sickLeave").click(function(){
-  console.log(datesArray)
+  var name = document.getElementById("empName").value
+  var mid = document.getElementById("mid").value
+
+  if (mid == 'Select MID'){
+    alert("Please select a valid MID")
+    return false
+  }
+
   var currentDate = getCurrentDate()
   var leaveData = { name: document.getElementById("empName").value,
                mid : document.getElementById("mid").value,
@@ -147,6 +154,14 @@ $("#sickLeave").click(function(){
 });
 
 $("#annualLeave").click(function(){
+  var name = document.getElementById("empName").value
+  var mid = document.getElementById("mid").value
+
+  if (mid == 'Select MID'){
+    alert("Please select a valid MID")
+    return false
+  }
+
   var currentDate = getCurrentDate()
   var leaveData = { name: document.getElementById("empName").value,
                mid : document.getElementById("mid").value,
