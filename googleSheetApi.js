@@ -10,10 +10,9 @@ var document = new GoogleSpreadsheet('')
 var sheet
 
 function updateCell(data){
-  var name = data.empName
+  var name = data.name
   var mid = data.mid
-  var leaveType = data.leaveType
-  var cover = data.cover
+  var leaveType = data.type
   var days = data.days.split(" ")
   days.pop()
   document.useServiceAccountAuth(creds,function(doc){
@@ -21,6 +20,7 @@ function updateCell(data){
       console.log('Loaded doc: '+info.title+' by '+info.author.email);
       days.forEach((monthData) => {
           var dataArr = monthData.split(":")
+          console.log(dataArr)
           sheet = getSheet(info, dataArr[0])
           sheet.getRows({
             limit: 50
@@ -28,16 +28,12 @@ function updateCell(data){
               console.log("Rows length" + rows.length)
               for (var i = 0; i < rows.length; i++) {
                 row = rows[i]
-                console.log(row.name, name)
                 if (row.name == name){
-                  row.leaves = row.leaves? parseInt(row.leaves) + parseInt(dataArr[1]) : parseInt(dataArr[1])
-                  if (leaveType == 'Annual Leave'){
-                    row.annual = row.annual ? parseInt(row.annual) + parseInt(dataArr[1]) : parseInt(dataArr[1])
+                  row.l = row.l? parseInt(row.l) + parseInt(dataArr[1]) : parseInt(dataArr[1])
+                  if (leaveType == 'Sick Leave'){
+                    row.sl = row.sl ? parseInt(row.sl) + parseInt(dataArr[1]) : parseInt(dataArr[1])
                   }else{
                     row.sick = row.sick ? parseInt(row.sick) + parseInt(dataArr[1]) : parseInt(dataArr[1])
-                  }
-                  if (cover == 'Yes'){
-                    row.cover = row.cover ? parseInt(row.cover) + parseInt(dataArr[1]) : parseInt(dataArr[1])
                   }
                   row.save(()=>{
                     console.log("updated")
@@ -46,6 +42,33 @@ function updateCell(data){
                 }
               }
           })
+       })
+    })
+  })
+}
+
+function addRange(data){
+//  type = durationType(data.dates)
+  document.useServiceAccountAuth(creds,function(doc){
+    document.getInfo(function(err, info) {
+      sheet = getSheet(info, "Test")
+      sheet.getRows({
+        limit: 50
+      }, function (err,rows){
+          for (var i = 0; i < rows.length; i++) {
+              row = rows[i]
+              if (row.name == data.name){
+                if (data.rangeType == 'ShortRange'){
+                  row.shortrange = row.shortrange == '' ? data.dates : row.shortrange + ',' + data.dates
+                }else{
+                  row.longrange = row.longrange == '' ? data.dates : row.longrange + ',' + data.dates
+                }
+                row.save(()=>{
+                  console.log("updated")
+                })
+                i = rows.length
+              }
+          }
       })
     })
   })
@@ -115,5 +138,6 @@ module.exports = {
     updateCell: updateCell,
     getAdminSheetRows: getAdminSheetRows,
     getAdminSheetRowsByMid: getAdminSheetRowsByMid,
-    getBankHolidays: getBankHolidays
+    getBankHolidays: getBankHolidays,
+    addRange: addRange
 }

@@ -56,7 +56,8 @@ app.get('/bankHolidays', function (req, res) {
 })
 
 app.post('/myaction', urlencodedParser, function (req, res) {
-console.log(req.body)
+  console.log(req.body)
+  api.addRange(req.body)
   api.updateCell(req.body)
   res.redirect("/")
 })
