@@ -4,6 +4,12 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var api = require('./googleSheetApi')
 
+app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -42,6 +48,15 @@ app.get('/mindDetails',function(req,res){
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
+})
+
+app.get('/admin', function (req, res) {
+  res.sendFile(path.join(__dirname + '/admin.html'))
+})
+
+app.post('/approval', function (req, res) {
+  a(req.body)
+  res.sendFile(path.join(__dirname + '/admin.html'))
 })
 
 app.get('/bankHolidays', function (req, res) {
