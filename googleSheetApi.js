@@ -35,6 +35,11 @@ function updateCell(data) {
                             } else {
                                 row.sick = row.sick ? parseInt(row.sick) + parseInt(dataArr[1]) : parseInt(dataArr[1])
                             }
+                            if (!data.cover) {
+                                row.lnc = row.lnc ? parseInt(row.lnc) + parseInt(dataArr[1]) : parseInt(dataArr[1])
+                            }else {
+                                row.lc = row.lc ? parseInt(row.lc) + parseInt(dataArr[1]) : parseInt(dataArr[1])
+                            }
                             row.save(() => {
                                 console.log("updated")
                             })

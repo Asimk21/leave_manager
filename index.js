@@ -3,6 +3,9 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var api = require('./googleSheetApi')
+var local = require('./leaves')
+
+
 
 app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({
@@ -55,7 +58,8 @@ app.get('/admin', function (req, res) {
 })
 
 app.post('/approval', function (req, res) {
-  a(req.body)
+  console.log(req.body)
+  local.removeLeaves(req.body)
   res.sendFile(path.join(__dirname + '/admin.html'))
 })
 
@@ -71,9 +75,7 @@ app.get('/bankHolidays', function (req, res) {
 })
 
 app.post('/myaction', urlencodedParser, function (req, res) {
-  console.log(req.body)
-  api.addRange(req.body)
-  api.updateCell(req.body)
+  local.isLong(req.body)
   res.redirect("/")
 })
 

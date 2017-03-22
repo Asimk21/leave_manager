@@ -1,4 +1,5 @@
 api = require ('./googleSheetApi')
+var local = require('./leaves')
 
 // api.updateCell("Rupam", 2, (bool) => {
 //     console.log(bool)
@@ -19,6 +20,8 @@ data = { name: "Rupam",
          to: "01/28/2017",
          dates: ["01/28/2017"]
        }
+//
+// api.addRange(data)
+// api.updateCell(data)
 
-api.addRange(data)
-api.updateCell(data)
+local.addLeaves(data)

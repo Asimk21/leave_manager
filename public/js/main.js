@@ -127,7 +127,7 @@ function calculateLeaveDates(from_date, to_date){
 }
 
 function durationType(dates){
-  if (dates.length <= 2) {
+  if (dates.length <= 3) {
       return("ShortRange")
   }else {
       return("LongRange")
@@ -163,6 +163,8 @@ function checksAndCreateData(){
                name: document.getElementById("empName").value,
                mid : document.getElementById("mid").value,
                days : document.getElementById('duration').value,
+               from: document.getElementById("fDate").value,
+               to: document.getElementById("tDate").value,
                rangeType: type
              }
   console.log(leaveData)
