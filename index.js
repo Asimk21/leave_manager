@@ -60,7 +60,7 @@ app.get('/admin', function (req, res) {
 app.post('/approval', function (req, res) {
   console.log(req.body)
   local.removeLeaves(req.body)
-  res.sendFile(path.join(__dirname + '/admin.html'))
+  res.redirect('/admin')
 })
 
 app.get('/bankHolidays', function (req, res) {
