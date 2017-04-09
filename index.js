@@ -58,8 +58,7 @@ app.get('/admin', function (req, res) {
 })
 
 app.post('/approval', function (req, res) {
-  console.log(req.body)
-  local.removeLeaves(req.body)
+  local.updateLeaves(req.body)
   res.redirect('/admin')
 })
 

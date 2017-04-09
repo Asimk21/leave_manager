@@ -16,15 +16,15 @@
     </nav>
 <div class="margin">
 <p><h3>List of Leave for Approval</h3></p>
-  <form action="approval" method="post">
+  <form id="admin"> <!-- action="approval" method="post"-->
    <h6> * Date format: mm/dd/yyyy <h6>
    <div id="Leaves" class="checkbox">
    </div>
     <div class="row margin">
       <div class="col-xs-12">
-       <input class="col-xs-4 btn btn-primary margin h1" type="submit" name="action" value="Cover" />
-       <input class="col-xs-4 btn btn-info margin h1" type="submit" name="action" value="No Cover" />
-       <input class="col-xs-4 btn btn-danger margin h1" type="submit" name="action" value="Reject" />
+       <input class="col-xs-4 btn btn-primary margin h1" id="leaveCover" value="Cover" />
+       <input class="col-xs-4 btn btn-info margin h1" id="leaveNoCover" value="No Cover" />
+       <input class="col-xs-4 btn btn-danger margin h1" id="reject" value="Reject" />
       </div>
    </div>
  </form>
