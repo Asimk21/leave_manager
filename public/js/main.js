@@ -79,9 +79,28 @@ $(function() {
   }
 });
 
+function getMindLeaves(mid, leaveData){
+ //  var leaveData = JSON.parse(getJsonData())
+  if(leaveData.length == 0){
+    return []
+  }
+  for(i=0; i<leaveData.length; i++){
+    if(typeof leaveData[i][mid] != "undefined"){
+      return leaveData[i][mid]["leaves"]
+    }  
+  } 
+  return []
+}
+
 $("#mid").change(function () {
     var employeeID = $("#mid option:selected").text();
     var empName
+    
+    var tableRef = document.getElementById('recentLeaves').getElementsByTagName('tbody')[0];
+ 
+    while(tableRef.rows.length != 0){
+      tableRef.deleteRow(tableRef.rows.length - 1)
+    }
 
     $.ajax({
           type: 'GET',
@@ -93,7 +112,41 @@ $("#mid").change(function () {
          }
 
      });
+
+
+     $.getJSON('leave.json', function (data){
+        
+      recentLeaves = getMindLeaves(employeeID, data)
+      recentLeaves.forEach(function(leave, i){
+        displayLeaves(leave);
+      })
+    });
+
 });
+
+
+function displayLeaves(leave)
+{
+  var tableRef = document.getElementById('recentLeaves').getElementsByTagName('tbody')[0];
+ 
+  // for(i=0; i<tableRef.rows.length; i++){
+  //   tableRef.deleteRow(i)
+  // }
+
+  // Insert a row in the table at the last row
+  var newRow   = tableRef.insertRow(tableRef.rows.length);
+  var newCell = []
+  // Insert a cell in the row at index 0
+  newRow.insertCell(0).appendChild(document.createTextNode(leave["from"]));
+  newRow.insertCell(1).appendChild(document.createTextNode(leave["to"]));
+  newRow.insertCell(2).appendChild(document.createTextNode(leave["type"]));
+  newRow.insertCell(3).appendChild(document.createTextNode(leave["status"]));
+}
+
+function deleteCell(){
+
+}
+
 
 $('#fromDate,#toDate').datetimepicker({
    locale: 'en-GB',format: 'MM/DD/YYYY',ignoreReadonly : true

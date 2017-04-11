@@ -3,9 +3,6 @@ var fs=require('fs');
 var filePath = "./public/leave.json"
 
 function compareLeaves(l1, l2){
-//console.log("Comparing Leaves")
-//console.log("L1: " + l1['from'] + " " + l1['to'] + " " + l1["status"] + " " + l1["type"])
-//console.log("L2: " + l2['from'] + " " + l2['to'] + " " + l2["status"] + " " + l2["type"])
      if(l1['from'] == l2['from']){
        if(l1['to'] == l2['to']){
          if(l1['status'] == l2['status']){
@@ -132,11 +129,11 @@ function isLong(data){
 //console.log(data)
    if(data["rangeType"] === 'ShortRange'){
      data["cover"] = false
-     data["status"] = "approved"
+     data["status"] = "unapproved"
      api.updateCell(data)
    }else{
      data["cover"] = false
-     data["status"] = "unapproved" 
+     data["status"] = "approved" 
    }
    x(data)
 } 
