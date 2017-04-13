@@ -29,16 +29,15 @@ function updateCell(data) {
                     for (var i = 0; i < rows.length; i++) {
                         row = rows[i]
                         if (row.name == name) {
-                            row.l = row.l ? parseInt(row.l) + parseInt(dataArr[1]) : parseInt(dataArr[1])
                             if (leaveType == 'Sick Leave') {
                                 row.sl = row.sl ? parseInt(row.sl) + parseInt(dataArr[1]) : parseInt(dataArr[1])
                             } else {
-                                row.sick = row.sick ? parseInt(row.sick) + parseInt(dataArr[1]) : parseInt(dataArr[1])
+                                row.l = row.l ? parseInt(row.l) + parseInt(dataArr[1]) : parseInt(dataArr[1])
                             }
-                            if (!data.cover) {
-                                row.lnc = row.lnc ? parseInt(row.lnc) + parseInt(dataArr[1]) : parseInt(dataArr[1])
-                            }else {
+                            if (data.cover) {
                                 row.lc = row.lc ? parseInt(row.lc) + parseInt(dataArr[1]) : parseInt(dataArr[1])
+                            }else {
+                                row.lnc = row.lnc ? parseInt(row.lnc) + parseInt(dataArr[1]) : parseInt(dataArr[1])
                             }
                             row.save(() => {
                                 console.log("updated")
